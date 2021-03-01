@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+{% extends 'regapp/base.html' %}
+{% block child_block %}
+<h1>Voter Details:</h1>
+<form method = "POST">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type = "submit" class = "btn btn-primary" value="submit">
+</form>
+{% endblock %}
