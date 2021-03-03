@@ -1,15 +1,10 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
-def index(request):
-    return render(request,'votingpanel/index.html')
-    
-def castvote(request):
-    return HttpResponse("Vote here")
-def results(request):
-    return HttpResponse("show results")
+# Create your views here.
+
+def home(request):
+    return render(request,'votingpanel/home.html')
 def voters(request):
-    return HttpResponse("see voters")
+    return render(request,'votingpanel/voters.html')
 def candidates(request):
-    return HttpResponse("see candidates")
+    return render(request,'votingpanel/candidates.html')
