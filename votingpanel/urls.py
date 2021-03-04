@@ -1,8 +1,9 @@
-from django.urls import path
-from . import views
+from django.contrib import admin
+from django.urls import path, include
+from votingpanel import views
 
 urlpatterns = [
-    path('',views.home,name="home"),
-    path("voters/",views.voters,name="VoterDetails"),
-    path("candidates/",views.candidates,name="CandidateDetails")
+    path('',views.index, name="home"),
+    path('login',views.login, name="login"),
+    path('logout',views.logout, name="logout"),
  ]
