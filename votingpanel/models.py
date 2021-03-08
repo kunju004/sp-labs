@@ -1,36 +1,37 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
-class Voter(models.Model):
-    STATUS = (
-            ('Pending', 'Pending'),
-            ('Voted', 'Voted'),
-            )
-    college_id = models.CharField(max_length=8, null=True)
-    voter_name = models.CharField(max_length=30, null=True)
-    voter_department = models.CharField(max_length=20, null=True)
-    academic_year = models.CharField(max_length=1, null=True)
-    email = models.CharField(max_length=40, null=True)
-    date_of_birth = models.DateField(null=True)
-    voting_status = models.CharField(max_length=10, null=True, choices=STATUS)
+class Position(models.Model):
+    title = models.CharField(max_length=50, unique=True)
+
     def __str__(self):
-       return self.voter_name
+        return self.title
 
-class Tag(models.Model):
-    voter_name = models.CharField(max_length=30, null=True)
+
+class Candidate(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    total_vote = models.IntegerField(default=0, editable=False)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, null=True)
+    
     
     def __str__(self):
-       return self.voter_name
-         
-class Candidate(models.Model):
-    Candidate_name = models.CharField(max_length=20, null=True)
-    Candidate_department = models.CharField(max_length=20, null=True)
-    Candidate_party_name = models.CharField(max_length=20, null=True)
-    Candidate_work = models.CharField(max_length=20, null=True) 
+        return "{} - {}".format(self.name, self.position.title)
+
+
+class Voter(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    branch = models.CharField(max_length=50, null=True)
+    faculty = models.CharField(max_length=50, null=True)
+    collegeid = models.CharField(max_length=50, unique=True, null=True)
+    academicyear = models.CharField(max_length=50, null=True)
+    def __str__(self):
+        return self.name
+
+
+class ControlVote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
-       return self.Candidate_name
-
-class Poll(models.Model):
-    Voter = models.ForeignKey(Voter, null=True, on_delete= models.SET_NULL)
-    Candidate = models.ForeignKey(Candidate, null=True, on_delete= models.SET_NULL)
+        return "{} - {} - {}".format(self.user, self.position, self.status)
