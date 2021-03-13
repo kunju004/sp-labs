@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'votingpanel/cand.css' %}">
+    <style>
+        .select{
+            padding: 8px 19px;
+            color:rgb(29, 28, 27);
+            background-color: lightgray;
+            border: 1px solid #000;
+            font-weight: bold;
+            font-family: 'Gill Sans';
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="alert ">
+            {% if messages %}
+            {% for message in messages %}
+                {{ message }}<br><br>
+            {% endfor %}
+            {% endif %}
+    </div>
+        <div class="register">
+            <h2>Add Details Here</h2>
+
+            <form action="/votingpanel/candidateDetails/" id="register" method="POST">
+                {% csrf_token %}
+                <label> candidateName:</label><br>
+                <input type="text" name="candidateName" placeholder="Enter Candidate name" required><br><br>
+
+                <label>Position:</label><br>
+                <!--<input type="text" name="position" placeholder="Please enter Position" required><br><br>-->
+
+                <select name="position" class="select">
+                    {% for position in positions %}
+                        <option value="{{position.id}}">{{ position.title }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                <label>Email:</label><br>
+                <input type="email" name="email" placeholder="Ente Email here" required><br><br>
+
+                <input type ="submit" name="submit">
+                <a href = "/votingpanel/admin/">Back</a>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

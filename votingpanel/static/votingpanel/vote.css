@@ -1,0 +1,112 @@
+*{
+    margin : 0;
+    padding :0;
+    box-sizing: border-box;
+    font-family: Cambria;
+}
+
+
+html,body{
+    display: grid;
+    height: 100%;
+    place-items: center;
+    /*background: url(images/img1.jpg);*/
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)) ,url(images/img1.jpg);
+    background-size: cover;
+   
+}
+
+.wrapper{
+    width: 350px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.3);
+    
+}
+
+.wrapper .title{
+    background: rgb(85, 199, 245);
+    color: rgb(20, 19, 19);
+    line-height: 65px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    border-radius: 10px 10px 0 0;
+}
+
+.wrapper .box{
+    padding: 20px 40px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.wrapper .box label{
+    display: flex;
+    height: 53px;
+    width: 100%;
+    align-items: center;
+    border: 1px solid rgb(253, 249, 249);
+    margin: 10px 0;
+    padding-left: 20px;
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+.wrapper .box label .dot{
+    height: 20px;
+    width: 20px;
+    /*background: #d9d9d9;*/
+    border-radius: 50%;
+    position: relative;
+}
+
+.box label .dot::before{
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    width: 9px;
+    height: 9px;
+    /*background: #333;*/
+    border-radius: 50%;
+}
+
+.wrapper .box .label .text{
+    color: #333;
+    font-size: 18px;
+    font-weight: bolder;
+    padding-left: 10px;
+    transition: color 0.3s ease;
+}
+
+.text{
+    font-size: larger;
+    font-weight: bolder;
+    color: blue;
+}
+
+.box input[type="submit"]
+{
+    border:none;
+    outline: none;
+    height: 40px;
+    background:rgb(104, 102, 102) ;
+    color :antiquewhite;
+    font-size: 18px;
+    border-radius: 70px;
+    align: center;
+}
+.box input[type="submit"]:hover{
+    cursor: pointer;
+    background: rgb(96, 142, 240);
+    color: #000;
+}
+
+.msg{
+    color:rgb(253, 38, 38);
+    text-align: center;
+    font-weight: bold;
+    margin-top: -30%;
+    
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{%static 'votingpanel/vote.css' %}">
+    <style>
+
+    </style>
+</head>
+
+<body>
+        <form action="/votingpanel/submit/" id="register" method="POST">
+        {% csrf_token %}
+        <div class="wrapper">
+            <div class="title">Available Candidates</div>
+            <div class="box">
+                <label class="option-1">
+                    {% for candidate in candidates %}
+                    <div class="dot"><input type="radio" name = "canname" value = {{candidate.candidateName}}></div>
+                    <div class="text"><label for="{{candidate.candidateName}}">{{candidate.candidateName}}</label></div>
+                    {% endfor %}
+                </label>
+                <div class="msg">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}<br><br>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <center><input type="submit" name="submit"></center>
+                
+            </div>
+        </div>
+    </form>
+
+       <!--- <form action="/votingpanel/submitvote/" id="register" method="POST">
+            {% csrf_token %}
+            <div class="msg">
+            {% if messages %}
+            {% for message in messages %}
+                {{ message }}<br><br>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    {% for candidate in candidates %}
+        <input type="radio" name = "canname" value = {{candidate.id}}>&nbsp {{ candidate.candidateName }}
+        <br><br>
+    {% endfor %}
+        <br><br>
+
+        <input type="submit" name="submit">-->
+
+</body>
+
+</html>

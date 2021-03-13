@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+    <head>
+        <title>Login</title>
+        <link rel = "stylesheet" type="text/css" href="{%static 'votingpanel/style2.css' %}">
+
+        <style>
+            .msg{
+                /*padding: 8px 19px;*/
+                color:rgb(243, 3, 3);
+                background-color: rgb(231, 255, 253);
+                /*border: 1px solid #000;*/
+                font-weight: bold;
+                font-family: 'Gill Sans';
+                text-indent: 50px 50px;
+                
+            }
+        </style>
+    </head>
+    <body>
+
+        
+       <div class="loginbox">
+           <img src = "/static/votingpanel/images/icon1.png" class="avatar">
+           <h1>Login Here</h1>
+           <form action="/votingpanel/check/" method="POST">
+            {% csrf_token %}
+            <p>Usename:</p>
+            <input type="text" name="username" placeholder="Pls enter username" required>
+            <p>Password:</p>
+            <input type="password" name="password" placeholder="Enter password" required>
+            <input type="submit" name="submit" value="Log in">
+            <center>
+                <div class="msg">
+            {% if messages %}
+        {% for message in messages %}
+            {{ message }}<br><br>
+        {% endfor %}
+        {% endif %}
+                </div>
+            </center>
+
+       </div>
+    </form>
+    </body>
+</html>
