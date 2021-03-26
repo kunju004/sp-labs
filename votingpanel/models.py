@@ -6,31 +6,44 @@ class Voter(models.Model):
             ('Pending', 'Pending'),
             ('Voted', 'Voted'),
             )
-    college_id = models.CharField(max_length=8, null=True)
-    voter_name = models.CharField(max_length=30, null=True)
-    voter_department = models.CharField(max_length=20, null=True)
+    collegeId = models.CharField(max_length=8,unique=True, null=True)
+    voterName = models.CharField(max_length=30, null=True)
+    voterDepartment = models.CharField(max_length=20, null=True)
     academic_year = models.CharField(max_length=1, null=True)
     email = models.CharField(max_length=40, null=True)
-    date_of_birth = models.DateField(null=True)
     voting_status = models.CharField(max_length=10, null=True, choices=STATUS)
     def __str__(self):
-       return self.voter_name
+       return self.voterName
 
-class Tag(models.Model):
-    voter_name = models.CharField(max_length=30, null=True)
+
+class Position(models.Model):
+    title = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Candidate(models.Model):
+    candidateName = models.CharField(max_length=50, null=True)
+    #total_vote = models.IntegerField(default=0, editable=False)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, null=True)
+    email = models.CharField(max_length=40, null=True)
+    
     
     def __str__(self):
-       return self.voter_name
-         
-class Candidate(models.Model):
-    Candidate_name = models.CharField(max_length=20, null=True)
-    Candidate_department = models.CharField(max_length=20, null=True)
-    Candidate_party_name = models.CharField(max_length=20, null=True)
-    Candidate_work = models.CharField(max_length=20, null=True) 
+        return "{} - {}".format(self.candidateName, self.position.title)
+
+class Admin(models.Model):
+    username = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
 
     def __str__(self):
-       return self.Candidate_name
+        return self.username
 
-class Poll(models.Model):
-    Voter = models.ForeignKey(Voter, null=True, on_delete= models.SET_NULL)
-    Candidate = models.ForeignKey(Candidate, null=True, on_delete= models.SET_NULL)
+class CountVote(models.Model):
+    voterId = models.IntegerField(null=True)
+    candidateId = models.IntegerField(null=True)
+    positionId = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.voterId

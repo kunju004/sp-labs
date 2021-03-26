@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <title>Result</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: hsla(157, 58%, 87%, 0.6);
+        }
+        table{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50% , -50%);
+            border-collapse: collapse;
+            width: 800px;
+            height: 200px;
+            border: 1px solid #bdc3c7;
+            box-shadow: 2px 2px 1px rgba(0,0,0,0.2) , -1px -1px 8px rgba(0 , 0 ,0, 0.2);
+        }
+
+        tr{
+            transition: all 0.4s ease-in;
+            cursor: pointer;
+        }
+
+        th,td{
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #header{
+            background-color: #067c72;
+            color: #fff;
+        }
+
+        h3{
+            font-weight: 600;
+            text-align: center;
+            background-color: #bdc3c7;
+            color: rgb(9, 9, 10);
+            padding: 10px 0px;
+            font-size: 40px;
+        }
+
+        tr:hover{
+            background-color: #a4caf7;
+            transform: scale(1.02);
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.2) , -1px -1px 8px rgba(0 , 0 ,0, 0.2);
+        }
+
+        .btn a{
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            height: 30px;
+            width: 70px;
+            background:rgb(169, 156, 245) ;
+            color :rgb(26, 26, 26);
+            font-size: 18px;
+            border-radius: 2px;
+            float: right;
+            margin-top: 25%;
+            margin-right: 20%;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+
+        a:hover{
+            cursor: pointer;
+            background: rgb(5, 198, 247);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <u><h3>Result</h3></u>
+    <table border=1>
+        <tr id = "header">
+            <th>Candidate Name</th>
+            <th>Total Votes</th>
+        </tr>
+        
+        
+        <!-- {% for candidate in candidates %}
+        <tr>
+            <td>{{candidate.candidateName}}</td>
+            <td>{{candidate.total_vote}}</td>
+        </tr>
+        {% endfor %} -->
+
+        {% for result in results %}
+        <tr>
+            <td>{{result.can.candidateName}}</td>
+            <td>{{result.count}}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    <div class="btn">
+    <a href = "/votingpanel/voting/" >Back</a>
+    </div>
+</body>
+
+</html>

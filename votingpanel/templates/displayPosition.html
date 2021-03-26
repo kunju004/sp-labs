@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+
+<head>
+    <title>Voting</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'votingpanel/availablePos.css' %}">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        
+            
+            
+
+           <form action="/votingpanel/displaycandidate/" id="register" method="POST">
+
+                {% csrf_token %}          
+                <h2>Available Positions</h2>     
+                <div class="msg" style="
+                    color: #000;
+                    letter-spacing: 1px;
+                    font-size: 1.8em;"> 
+                    
+                    {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}<br><br>
+                    {% endfor %}
+                </div>
+                    {% else %}
+                <select  name="position" class="select">
+                    {% for position in positions %}
+                        <option value={{position.id}}>{{ position.title }}</option>
+                        <br><br>
+                    {% endfor %}
+                </select><br><br>
+                <input type ="submit" name="submit" value = "GO">
+                {% endif %}
+                <a href="/votingpanel/voting/" class="btn">Back</a>
+                <!-- <input onClick="window.location.href='../votingpanel/voting/'" type="submit" Value="Back"> -->
+           </form>
+        </div>
+    
+</body>
+
+</html>

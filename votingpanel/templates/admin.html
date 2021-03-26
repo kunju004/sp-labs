@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Welcome</title>
+        <link rel = "stylesheet" type="text/css" href="{%static 'votingpanel/admin.css' %}">
+        <style>
+        </style>
+    </head>
+
+    <body>
+        
+        {%block content %}
+        <header>
+            <div class ="main">
+                <div class="logo">
+                    <img src = "/static/votingpanel/images/icon.png">
+                </div>
+                <div class = "logo_container">
+                    <p><strong>Evoting</strong></p>
+
+            <div class = "button">
+                <a href = "/votingpanel/index" class="btn"><strong>Home</strong></a><br><br><br>
+                <!-- <a href = "/votingpanel/index/" class="btn"><strong>Logout</strong></a><br><br><br> -->
+                <a href = "/votingpanel/addVoter" class="btn"><strong>Add Voter</strong></a>
+                <a href = "/votingpanel/addCandidate" class="btn"><strong>Add Candidate</strong></a>
+                <a href = "/votingpanel/addPosition" class="btn"><strong>Add Position</strong></a> 
+            </div>
+        </header>
+        {%endblock %}
+
+    </body>
+</html>

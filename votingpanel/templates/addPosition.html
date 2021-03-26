@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+
+<head>
+    <title>Add Position</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'votingpanel/cand.css' %}">
+    <style>
+        .btn{
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 150px;
+            background:rgb(204, 35, 30) ;
+            color :antiquewhite;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+        a{
+            text-decoration: none;
+        }
+
+        a:hover{
+            cursor: pointer;
+            background: rgb(5, 198, 247);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="alert ">
+            {% if messages %}
+            {% for message in messages %}
+                {{ message }}<br><br>
+            {% endfor %}
+            {% endif %}
+    </div>
+        <div class="register">
+            <h2>Add Details Here</h2>
+
+            <form action="/votingpanel/positionDetails/" id="register" method="POST">
+                {% csrf_token %}
+                <label>Position:</label><br>
+                <input type="text" name="name" placeholder="Please enter Position" required><br><br>
+
+                <input type ="submit" name="submit">
+                <a href = "/votingpanel/admin/" class="btn">Back</a>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
