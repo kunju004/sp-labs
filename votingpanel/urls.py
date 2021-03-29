@@ -3,7 +3,6 @@ from django.conf.urls import url
 from votingpanel import views
 
 urlpatterns = [
-<<<<<<< HEAD
   path('', views.index, name="HOME"),
   url(r'login/',views.ShowLoginPage),
   path('index/',views.index),
@@ -26,9 +25,3 @@ urlpatterns = [
   
   
 ]  
-=======
-    path('',views.index, name="home"),
-    path('login',views.loginUser, name="login"),
-    path('logout',views.logoutUser, name="logout"),
- ]
->>>>>>> ec5b5560b9f4e382ecf7bb1c3086f149fc196e9b

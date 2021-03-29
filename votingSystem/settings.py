@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-<<<<<<< HEAD:votingSystem/settings.py
 from pathlib import Path
 from django.contrib.messages import constants as messages
 
@@ -19,13 +18,6 @@ from django.contrib.messages import constants as messages
 BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL="/static/"
 STATIC_ROOT=os.path.join(BASE_DIR,"static")
-=======
-
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
->>>>>>> ec5b5560b9f4e382ecf7bb1c3086f149fc196e9b:online_voting_system/settings.py
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -42,23 +34,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD:votingSystem/settings.py
-=======
-    # 'votingpanel.apps.VotingpanelConfig',
-    'widget_tweaks',
->>>>>>> ec5b5560b9f4e382ecf7bb1c3086f149fc196e9b:online_voting_system/settings.py
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD:votingSystem/settings.py
     #'votingpanel',
     'votingpanel.apps.VotingpanelConfig',
-=======
-    'votingpanel'
->>>>>>> ec5b5560b9f4e382ecf7bb1c3086f149fc196e9b:online_voting_system/settings.py
 ]
 
 MIDDLEWARE = [
@@ -72,9 +55,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'votingSystem.urls'
-
-
-
 
 TEMPLATES = [
     {
@@ -106,7 +86,6 @@ WSGI_APPLICATION = 'votingSystem.wsgi.application'
 #}
 
 DATABASES = {
-<<<<<<< HEAD:votingSystem/settings.py
 'default' :{
 'ENGINE' : 'django.db.backends.mysql',
 'NAME' : 'project' , # Name of the database*
@@ -115,12 +94,6 @@ DATABASES = {
 'HOST' : 'localhost', # IP address of the database
 'PORT' : '3306', # port number of database server
 }
-=======
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
->>>>>>> ec5b5560b9f4e382ecf7bb1c3086f149fc196e9b:online_voting_system/settings.py
 }
 
 
@@ -161,7 +134,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR,"media")
-MEDIA_URL = '/media/'
