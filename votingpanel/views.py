@@ -167,5 +167,41 @@ def voterDetails(request):
         messages.success(request, 'Voter added successfully!!')
         return render(request,'addVoter.html')
 
+def deleteVoter(request):
+    voter = Voter.objects.all()
+    return render(request,'deleteVoter.html',{'voters': voter})
 
+def removeVoter(request):
+    if request.method == 'POST':
+        voterName=request.POST.get('voterName','')
+        collegeId=request.POST.get('collegeId','')
+        email =request.POST.get('email','') 
+        voter = Voter.objects.filter(collegeId = collegeId , email = email)
+        user = User.objects.filter( username = email)
 
+        if voter.exists() and user.exists():
+            voter.delete()
+            user.delete()
+            messages.success(request, 'Voter deleted successfully!!')
+        else:
+            messages.success(request, 'Enter appropriate details!!')
+    return render(request,'deleteVoter.html')
+
+def deleteCandidate(request):
+    pos = Position.objects.all()
+    return render(request,'deleteCandidate.html',{'positions': pos})
+
+def removeCandidate(request):
+    if request.method == 'POST':
+        candidateName=request.POST.get('candidateName','')
+        position_id=request.POST.get('position','')
+        position = Position.objects.get(id = position_id)
+        email=request.POST.get('email','')
+        can = Candidate.objects.filter(candidateName = candidateName  , position_id = position_id , email=email)
+
+        if can.exists() :
+            can.delete()
+            messages.success(request, 'Candidate deleted successfully!!')
+        else:
+            messages.success(request, 'Enter appropriate details!!')
+    return render(request,'deleteCandidate.html')

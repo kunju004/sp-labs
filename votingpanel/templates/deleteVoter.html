@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static%}
+<html>
+
+<head>
+    <title>Delete Voter</title>
+    <link rel="stylesheet" type="text/css" href="{%static 'votingpanel/cand.css' %}">
+    <style>
+        .select{
+            padding: 10px 19px;
+            color:rgb(82, 79, 76);
+            background-color: lightgray;
+            border: 2px solid #000;
+            font-weight: bold;
+            font-family: 'Gill Sans';
+           
+        }
+        .btn {
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 180px;
+            background:rgb(204, 35, 30) ;
+            color :antiquewhite;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+        a{
+            text-decoration: none;
+        }
+
+        a:hover{
+            cursor: pointer;
+            background: rgb(5, 198, 247);
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="alert ">
+            {% if messages %}
+            {% for message in messages %}
+                {{ message }}<br><br>
+            {% endfor %}
+            {% endif %}
+    </div>
+        <div class="register">
+            <h2>Enter Details Here</h2>
+
+            <form action="/votingpanel/removeVoter/" id="register" method="POST">
+                {% csrf_token %}
+                <label>collegeId:</label><br><br>
+                <select name="collegeId" class="select">
+                    {% for voter in voters %}
+                        <option value="{{voter.collegeId}}">{{ voter.collegeId }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+
+                <label> voterName:</label><br>
+                <input type="text" name="voterName" placeholder="Enter Voter name" required><br><br>
+
+                <label>Email:</label><br>
+                <input type="email" name="email" placeholder="Ente Email here" required><br><br>
+
+                <br><br>
+                
+                <input type="submit" name="submit" value = "Delete">
+                
+                <a href = "/votingpanel/admin/" class="btn">Back</a>
+            
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
