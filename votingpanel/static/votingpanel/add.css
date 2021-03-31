@@ -46,6 +46,7 @@ div.register{
 form .register
 {
     margin: 40px;
+    
 }
 
 label{
@@ -65,16 +66,29 @@ input #name{
     box-shadow: inset 1px 1px 5px rgba(0,0,0,0.3);
 }
 
-.register input[type="submit"]
+.register  input[type="submit"]
 {
-    border:none;
+    /* border:none;
     outline: none;
     height: 40px;
-    width: 100px;
+    width: 50px;
     background:rgb(204, 35, 30) ;
     color :antiquewhite;
     font-size: 18px;
     border-radius: 20px;
+    float: left; */
+
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin: 15px 0;
+    font-size: 1.7em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #303e5c;
+    box-shadow: 0 10px 20px #303e5c69 ;
+    cursor: pointer;
 }
 .register input[type="submit"]:hover{
     cursor: pointer;

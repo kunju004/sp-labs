@@ -3,8 +3,30 @@
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Add Position</title>
     <link rel="stylesheet" type="text/css" href="{%static 'votingpanel/cand.css' %}">
+    <style>
+        .btn{
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 150px;
+            background:rgb(204, 35, 30) ;
+            color :antiquewhite;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+        a{
+            text-decoration: none;
+        }
+
+        a:hover{
+            cursor: pointer;
+            background: rgb(5, 198, 247);
+            color: #000;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,7 +47,7 @@
                 <input type="text" name="name" placeholder="Please enter Position" required><br><br>
 
                 <input type ="submit" name="submit">
-                <a href = "/votingpanel/admin/">Back</a>
+                <a href = "/votingpanel/admin/" class="btn">Back</a>
 
             </form>
         </div>

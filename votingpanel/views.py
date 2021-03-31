@@ -9,6 +9,7 @@ from votingpanel.models import Voter,Candidate,Position,Admin,CountVote
 from django.views import generic
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.db.models import  Count
 
 #Create your views here.
 
@@ -28,10 +29,6 @@ def validate(request):
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            user = User.objects.get(username = username)
-            u = user.id
-            us = CountVote.objects.create(voterId = u)
-            us.save()
             pos = Position.objects.all()
             return render(request,'displayPosition.html',{'positions': pos})
         else:
@@ -40,7 +37,8 @@ def validate(request):
             return render(request,'login.html')
 
 def displayPosition(request):
-    return render(request,'displayPosition.html')
+    pos = Position.objects.all()
+    return render(request,'displayPosition.html',{'positions': pos})
 
 def logout(request):
     auth.logout(request)
@@ -61,10 +59,10 @@ def displaycandidate(request):
             check = CountVote.objects.filter(voterId = u, positionId = position_id)
             
             if check.exists():
-                messages.error(request, 'Already voted')
+                messages.error(request, 'you have already been voted for this position.')
                 return render(request,'displayPosition.html')
             else:
-                voter = CountVote.objects.filter(voterId = u).update(positionId = position_id)
+                voter = CountVote.objects.create(voterId = u , positionId = position_id)
             if can.exists():
                 return render(request,'displayCandidate.html',{'candidates':can})
             else:
@@ -82,6 +80,25 @@ def submit(request):
         candidate_id = c.id
         voter = CountVote.objects.filter(voterId = u , positionId = pos).update(candidateId = candidate_id)
         return render(request,'submit.html')
+
+def result(request):  
+    candidates = Candidate.objects.all()
+    results = []
+    
+    for candidate in candidates:
+        result = {}
+    
+        countvote = CountVote.objects.filter(positionId = candidate.position_id , candidateId = candidate.id).count()
+        result['can'] = candidate
+        result['count'] = countvote
+        results.append(result)
+    return render(request,'result.html',{ 'results' : results })
+
+    # can = Candidate.objects.all()
+    # for i in can:
+    #     countvote = CountVote.objects.filter(positionId = i.position_id , candidateId = i.id).count()
+    #     candidate = Candidate.objects.filter(position_id = i.position_id , id = i.id).update(total_vote = countvote)
+    # return render(request,'result.html',{ 'candidates' : can })
 
             
 def adminLogin(request):
@@ -118,8 +135,6 @@ def positionDetails(request):
 
 def addCandidate(request):
     pos = Position.objects.all()
-    #pos = Position.objects.raw('SELECT * FROM votingpanel_position where id =2 ')
-    #pos = Position.objects.filter(id = 4)
     return render(request,'addCandidate.html',{'positions': pos})
 
 def candidateDetails(request):
@@ -147,23 +162,46 @@ def voterDetails(request):
         voter.save()
         username = request.POST.get('email','') 
         password = request.POST.get('id','')
-        #user = User(username = username , password = password)
         user = User.objects.create_user(username = username , password = password)
         user.save()
         messages.success(request, 'Voter added successfully!!')
         return render(request,'addVoter.html')
-        #return checking(request)
 
-def checking(request):
+def deleteVoter(request):
+    voter = Voter.objects.all()
+    return render(request,'deleteVoter.html',{'voters': voter})
+
+def removeVoter(request):
     if request.method == 'POST':
-        collegeId=request.POST.get('id','')
-        for voter in Voter.objects.all():
-            if voter.collegeId == collegeId:
-                messages.error(request, 'college Id must be unique!!')
-                return render(request,"addVoter.html")
-        return render(request,"addVoter.html")
- 
- 
+        voterName=request.POST.get('voterName','')
+        collegeId=request.POST.get('collegeId','')
+        email =request.POST.get('email','') 
+        voter = Voter.objects.filter(collegeId = collegeId , email = email)
+        user = User.objects.filter( username = email)
 
+        if voter.exists() and user.exists():
+            voter.delete()
+            user.delete()
+            messages.success(request, 'Voter deleted successfully!!')
+        else:
+            messages.success(request, 'Enter appropriate details!!')
+    return render(request,'deleteVoter.html')
 
+def deleteCandidate(request):
+    pos = Position.objects.all()
+    return render(request,'deleteCandidate.html',{'positions': pos})
 
+def removeCandidate(request):
+    if request.method == 'POST':
+        candidateName=request.POST.get('candidateName','')
+        position_id=request.POST.get('position','')
+        position = Position.objects.get(id = position_id)
+        email=request.POST.get('email','')
+        can = Candidate.objects.filter(candidateName = candidateName  , position_id = position_id , email=email)
+
+        if can.exists() :
+            can.delete()
+            messages.success(request, 'Candidate deleted successfully!!')
+        else:
+            messages.success(request, 'Enter appropriate details!!')
+    return render(request,'deleteCandidate.html')

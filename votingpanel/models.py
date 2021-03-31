@@ -25,7 +25,7 @@ class Position(models.Model):
 
 class Candidate(models.Model):
     candidateName = models.CharField(max_length=50, null=True)
-    total_vote = models.IntegerField(default=0, editable=False)
+    #total_vote = models.IntegerField(default=0, editable=False)
     position = models.ForeignKey(Position, on_delete=models.CASCADE, null=True)
     email = models.CharField(max_length=40, null=True)
     

@@ -17,14 +17,11 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import url
 from votingSystem import settings
-#from votingpanel.views import login,logout,ShowLoginPage,getUserDetails
-#from votingpanel.views import logout,ShowLoginPage,addVoter
+from votingpanel.views import index
 from votingpanel import views 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('votingpanel/',include('votingpanel.urls')),
-    #path('',views.ShowLoginPage,name="login"),
-    #path('votingpanel/addVoter/',views.addVoter),
-    #path('votingpanel/index/',views.index),
+    path('',views.index),
     
 ]
